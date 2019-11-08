@@ -15,7 +15,7 @@ try:
     groupUrlList = groupsFile.read().splitlines()
 
 except IOError as e:
-    print("You need to make a groups.txt file in the same dir as grouploader.py")
+    print("You need to make a groups.txt file in the same dir as yahooloader.py")
 
 # get cookieT from line 1 and cookieY from line 2 of groups.txt
 cookieT = '"' + groupUrlList.pop(0) + '"'
