@@ -43,4 +43,4 @@ for index in range(len(groupUrlList)):
 index = 0
 for index in range(len(groupNameList)):
     print("DOWNLOADING: " + groupNameList[index])
-    subprocess.call(['python38', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupNameList[index], arguments])
+    subprocess.call(['python', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupNameList[index], arguments])
