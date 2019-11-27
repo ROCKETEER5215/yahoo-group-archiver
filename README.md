@@ -34,8 +34,10 @@ In Google Chrome these steps are required:
 2. Click the 🔒 padlock, or ⓘ (cicled letter i) in the address bar to the left of the website address.
 3. Click "Cookies".
 4. On the Allowed tab select "Yahoo.com" followed by "Cookies" in the tree listing.
-5. Select the T cookie and copy the Content field in place of `<T_cookie>` in the above command line.
-6. Select the Y cookie and copy the Content field in place of `<Y_cookie>` in the above command line.
+5. Select the T cookie, right click the value in the _Content_ field and _Select All_. Then copy the value and paste in
+   place of the `<T_cookie>` in the above command line.
+6. Select the Y cookie, right click the value in the _Content_ field and _Select All_. Then copy the value and paste in
+   place of the `<Y_cookie>` in the above command line.
 
 In Firefox:
 1. Go to [Yahoo Groups](https://groups.yahoo.com/neo) (make sure you're signed in with your account).
@@ -53,10 +55,10 @@ Files will be placed into the directory structure groupname/{email,files,photos,
 ## Command Line Options
 ```
 usage: yahoo.py [-h] [-ct COOKIE_T] [-cy COOKIE_Y] [-ce COOKIE_E]
-                [-cf COOKIE_FILE] [-e] [-at] [-f] [-i] [-d] [-l] [-c] [-p]
-                [-a] [-m] [--user-agent USER_AGENT] [--start START]
-                [--stop STOP] [--ids IDS [IDS ...]] [-w] [-v] [--colour]
-                [--delay DELAY]
+                [-cf COOKIE_FILE] [-e] [-at] [-f] [-i] [-t] [-r] [-d] [-l]
+                [-c] [-p] [-a] [-m] [-o] [--user-agent USER_AGENT]
+                [--start START] [--stop STOP] [--ids IDS [IDS ...]] [-w] [-v]
+                [--colour] [--delay DELAY]
                 group
 
 positional arguments:
@@ -83,16 +85,23 @@ Authentication Options:
 What to archive:
   By default, all the below.
 
-  -e, --email           Only archive email and attachments (from email)
+  -e, --email           Only archive html and raw email and attachments (from
+                        email) through the messages API
   -at, --attachments    Only archive attachments (from attachments list)
   -f, --files           Only archive files
   -i, --photos          Only archive photo galleries
+  -t, --topics          Only archive HTML email and attachments through the
+                        topics API
+  -r, --raw             Only archive raw email without attachments through the
+                        messages API
   -d, --database        Only archive database
   -l, --links           Only archive links
   -c, --calendar        Only archive events
   -p, --polls           Only archive polls
   -a, --about           Only archive general info about the group
   -m, --members         Only archive members
+  -o, --overwrite       Overwrite existing files such as email and database
+                        records
 
 Request Options:
   --user-agent USER_AGENT

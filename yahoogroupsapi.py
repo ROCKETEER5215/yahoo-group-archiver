@@ -34,6 +34,11 @@ class Unrecoverable(YGAException):
     pass
 
 
+class BadSize(YGAException):
+    """The filesize is between 60 and 68 bytes, which could be in error"""
+    pass
+
+
 class AuthenticationError(Unrecoverable):
     pass
 
@@ -62,6 +67,7 @@ class YahooGroupsAPI:
     API_VERSIONS = {
             'HackGroupInfo': 'v1',  # In reality, this will get the root endpoint
             'messages': 'v1',
+            'topics': 'v1',
             'files': 'v2',
             'albums': 'v2',         # v3 is available, but changes where photos are located in json
             'database': 'v1',
@@ -78,7 +84,7 @@ class YahooGroupsAPI:
     ww = None
     http_context = dummy_contextmanager
 
-    def __init__(self, group, cookie_jar=None, headers={}, min_delay=0, retries=10):
+    def __init__(self, group, cookie_jar=None, headers={}, min_delay=0, retries=15):
         self.s = requests.Session()
         self.group = group
         self.min_delay = min_delay
@@ -109,7 +115,10 @@ class YahooGroupsAPI:
     def backoff_time(self, attempt):
         """Calculate backoff time from minimum delay and attempt number.
            Currently no good reason for choice of backoff, except not to increase too rapidly."""
-        return max(self.min_delay, random.uniform(0, attempt))
+        base = 2
+        if attempt > 8:
+            attempt = 8
+        return self.min_delay*base**attempt+random.uniform(0, self.min_delay*base**attempt)
 
     def download_file(self, url, f=None, **args):
         with self.http_context(self.ww):
@@ -131,6 +140,14 @@ class YahooGroupsAPI:
                         self.logger.warning("Giving up, too many failed attempts at downloading %s", url)
                 elif r.status_code != 200:
                     self.logger.error("Unknown %d error for %s, giving up on this download", r.status_code, url)
+                elif len(r.content) in range(60, 69):
+                    self.logger.info("Got potentially invalid size of %d for %s, will sleep and retry", len(r.content), url)
+                    if attempt < self.retries-1:
+                        delay = self.backoff_time(attempt)
+                        self.logger.info("Attempt %d, delaying for %.2f seconds", attempt+1, delay)
+                        time.sleep(delay)
+                        continue
+                    self.logger.warning("Giving up, too many potentially failed attempts at downloading %s", url)
                 r.raise_for_status()
                 break
 
@@ -157,17 +174,19 @@ class YahooGroupsAPI:
 
                     code = r.status_code
                     if code == 307:
-                        raise NotAuthenticated()
+                        raise Recoverable() # NotAuthenticated()
                     elif code == 401 or code == 403:
                         raise Unauthorized()
                     elif code == 404:
                         raise NotFound()
+                    elif len(r.content) in range(60, 69):
+                        raise BadSize()
                     elif code != 200:
                         # TODO: Test ygError response?
                         raise Recoverable()
 
                     return r.json()['ygData']
-                except (ConnectionError, Timeout, Recoverable) as e:
+                except (ConnectionError, Timeout, Recoverable, BadSize) as e:
                     self.logger.info("API query failed for '%s': %s", uri, e)
                     self.logger.debug("Exception detail:", exc_info=e)
 
