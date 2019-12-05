@@ -111,14 +111,14 @@ def command_list(arguments, groupName):
     cmd = []
     if not arguments:
         if not isCookieFile:
-            cmd = ['python38', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupName]
+            cmd = ['python', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupName]
         else:
-            cmd = ['python38', 'yahoo.py', '-cf', cookieFile, groupName]
+            cmd = ['python', 'yahoo.py', '-cf', cookieFile, groupName]
     else:
         if not isCookieFile:
-            cmd = ['python38', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupName, arguments]
+            cmd = ['python', 'yahoo.py', '-ct', cookieT, '-cy', cookieY, groupName, arguments]
         else:
-            cmd = ['python38', 'yahoo.py', '-cf', cookieFile, groupName, arguments]
+            cmd = ['python', 'yahoo.py', '-cf', cookieFile, groupName, arguments]
     return cmd
 
 
