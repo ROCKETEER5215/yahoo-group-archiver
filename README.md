@@ -125,6 +125,48 @@ Output Options:
   -w, --warc            Output WARC file of raw network requests. [Requires
                         warcio package installed]
 ```
+## Yahoo Loader
+
+If you have alot of groups to download yahooloader.py can automate the task of having to manually enter and run each one using yahoo.py.
+* To use yahooloader.py:
+1. Create a txt file called groups.txt in the same directory as yahooloader.py
+2. Use instructions given above to retrive your `T` and `Y` cookie values from a web browser
+3. You can also get or make a cookie file (if you need a EuConsent cookie use this method)
+4. Put your `T` cookie on the first line of groups.txt _without_ quotes
+5. Put your `Y` cookie on the second line of groups.txt _without_ quotes
+6. If your using a cookie file put cookie.txt on the first line of groups.txt
+7. _Do not leave blank lines inbetween anything in groups.txt as this will cause errors!_
+8. Look at the Command Line Options section above, everything listed under `What to archive:` can be used in groups.txt
+9. To use the default in groups.txt (meaning archive everything) use `all`
+10. On the next line you _must_ specify your global archive options, these will be used for any groups that do not have options defined
+11. From this point on copy and paste the url address's for the groups you want to download with one per line
+12. If you want to use a different set of options for downloading a certain group put them on the line above it
+* Examples of groups.txt file:
+```
+z=someLongText&a=someLongText&sk=someLongText&ks=someLongText&kt=someLongText&ku=someLongText&d=someLongText&af=someLongText
+v=1&n=someLongText&l=someShortText=someShortText&r=hp&intl=us
+all
+--files --about
+https://groups.yahoo.com/neo/groups/ExampleGroup1/info
+https://groups.yahoo.com/neo/groups/ExampleGroup2/info
+```
+All the files and the about page are downloaded for ExampleGroup1.
+
+Everything is downloaded for ExampleGroup2.
+
+```
+cookie.txt
+--files --about
+https://groups.yahoo.com/neo/groups/ExampleGroup1/info
+https://groups.yahoo.com/neo/groups/ExampleGroup2/info
+all
+https://groups.yahoo.com/neo/groups/ExampleGroup3/info
+```
+All the files and the about page are downloaded for ExampleGroup1 and ExampleGroup2.
+
+Everything is downloaded for ExampleGroup3.
+
+13. 
 
 ## Next steps
 
