@@ -50,6 +50,8 @@ Note: the string you paste _must_ be surrounded by quotes.
 Using the `--cookie-file` (or `-cf`) option allows you to specify a file in which the authentication cookies will be
 loaded and saved in.
 
+If your using a Chrome browser you can use the [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en) extension to make a cookie file. Go to options and change the export formant to Perl::LWP then go to [Yahoo Groups](https://groups.yahoo.com/neo) and use the export button to copy the cookies to the clipboard. Make a txt file and paste the cookies in it then add `#LWP-Cookies-2.0` to the first line of the file.
+
 Files will be placed into the directory structure groupname/{email,files,photos,databases}
 
 ## Command Line Options
