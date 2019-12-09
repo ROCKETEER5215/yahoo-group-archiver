@@ -172,6 +172,10 @@ Everything is downloaded for ExampleGroup3.
 14. Groups that had errors will be added to redownload.txt you should check each of the groups in the list to see whats missing and
 go to the groups to make sure there is nothing wrong with them. If yahooloader has been running a long time authentication errors will happen sometimes. 
 15. You can then rename or delete your old groups.txt and use your redownload.txt as the new groups.txt and reattempt to download the groups with errors.
+* To run yahooloader.py
+```
+python yahooloader.py
+```
 
 ## Next steps
 
