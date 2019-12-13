@@ -139,7 +139,7 @@ If you have alot of groups to download yahooloader.py can automate the task of h
 6. If your using a cookie file put cookie.txt on the first line of groups.txt.
 7. _Do not leave blank lines inbetween anything in groups.txt as this will cause errors!_.
 8. Look at the Command Line Options section above, everything listed under `What to archive:` can be used in groups.txt.
-9. To use the default in groups.txt (meaning archive everything) use `all`.
+9. To use the default in groups.txt (meaning archive everything) use `getAllDefault`.
 10. On the next line you _must_ specify your global archive options, these will be used for any groups that do not have options defined.
 11. From this point on copy and paste the url address's for the groups you want to download with one per line.
 12. If you want to use a different set of options for downloading a certain group put them on the line above it.
@@ -147,24 +147,24 @@ If you have alot of groups to download yahooloader.py can automate the task of h
 ```
 z=someLongText&a=someLongText&sk=someLongText&ks=someLongText&kt=someLongText&ku=someLongText&d=someLongText&af=someLongText
 v=1&n=someLongText&l=someShortText=someShortText&r=hp&intl=us
-all
---files --about
+getAllDefault
+--files
 https://groups.yahoo.com/neo/groups/ExampleGroup1/info
 https://groups.yahoo.com/neo/groups/ExampleGroup2/info
 ```
-All the files and the about page are downloaded for ExampleGroup1.
+All the files are downloaded for ExampleGroup1.
 
 Everything is downloaded for ExampleGroup2.
 
 ```
 cookie.txt
---files --about
+--files
 https://groups.yahoo.com/neo/groups/ExampleGroup1/info
 https://groups.yahoo.com/neo/groups/ExampleGroup2/info
-all
+getAllDefault
 https://groups.yahoo.com/neo/groups/ExampleGroup3/info
 ```
-All the files and the about page are downloaded for ExampleGroup1 and ExampleGroup2.
+All the files are downloaded for ExampleGroup1 and ExampleGroup2.
 
 Everything is downloaded for ExampleGroup3.
 
