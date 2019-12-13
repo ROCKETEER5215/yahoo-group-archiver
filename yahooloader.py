@@ -48,7 +48,7 @@ try:
                 if 'https' not in lineIn:
                     temp = (index, lineIn)
                     argumentsList.append(temp)
-                elif 'all' in lineIn:
+                elif 'getAllDefault' in lineIn:
                     temp = (index, False)
                     argumentsList.append(temp)
                 else:
@@ -60,7 +60,7 @@ try:
                 if 'https' not in lineIn:
                     temp = (index, lineIn)
                     argumentsList.append(temp)
-                elif 'all' in lineIn:
+                elif 'getAllDefault' in lineIn:
                     temp = (index, False)
                     argumentsList.append(temp)
                 else:
@@ -170,7 +170,7 @@ def group_archive_check(name, arguments, output, returncode, index):
         # save the list of Errors for groups that failed to download
         hasError = True
         if not arguments:
-            arguments = 'all'
+            arguments = 'getAllDefault'
         with open('yahooloaderlog.txt', 'a+') as file:
             file.write('%s\n' % name)
             file.write('%s\n' % arguments)
@@ -191,17 +191,17 @@ def redownload(list):
             if argumentsList[0][1]:
                 file.write('%s\n' % argumentsList[0][1])
             else:
-                file.write('%s\n' % 'all')
+                file.write('%s\n' % 'getAllDefault')
         else:
             file.write('%s\n' % cookieT)
             file.write('%s\n' % cookieY)
             if argumentsList[0][1]:
                 file.write('%s\n' % argumentsList[0][1])
             else:
-                file.write('%s\n' % 'all')
+                file.write('%s\n' % 'getAllDefault')
         for i in range(len(list)):
             if not list[i] and argumentsList[0][1]:
-                file.write('%s\n' % 'all')
+                file.write('%s\n' % 'getAllDefault')
             elif argumentsList[0][1] not in list[i]:
                 file.write('%s\n' % list[i])
 
