@@ -214,6 +214,8 @@ def end_of_log():
 
 def error_check_list():
     errorCheckList = []
+    # YahooGroupsAPI
+    errorCheckList.append("YahooGroupsAPI Giving up, too many potentially failed attempts at downloading")
     # GET_BEST_PHOTOINFO
     errorCheckList.append("photoType")
     # ARCHIVE_MESSAGE_CONTENT
